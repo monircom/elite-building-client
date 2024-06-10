@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>StayVista | Vacation Homes & Condo Rentals</title>
+        <title>Elite Building | Building Management System</title>
       </Helmet>
       {/* Categories section  */}
       <Categories />
