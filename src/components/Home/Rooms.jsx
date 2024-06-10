@@ -3,20 +3,34 @@ import Card from './Card'
 import Container from '../Shared/Container'
 import Heading from '../Shared/Heading'
 import LoadingSpinner from '../Shared/LoadingSpinner'
+import { useQuery } from '@tanstack/react-query'
+import useAxiosCommon from '../../hooks/useAxiosCommon'
 
 const Rooms = () => {
-  const [rooms, setRooms] = useState([])
+  //const [rooms, setRooms] = useState([])
+  const axiosCommon = useAxiosCommon()
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    setLoading(true)
-    fetch(`./rooms.json`)
-      .then(res => res.json())
-      .then(data => {
-        setRooms(data)
-        setLoading(false)
-      })
-  }, [])
+  // useEffect(() => {
+  //   setLoading(true)
+  //   fetch(`./rooms.json`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setRooms(data)
+  //       setLoading(false)
+  //     })
+  // }, [])
+
+
+  const { data: rooms = [], isLoading } = useQuery({
+    queryKey: ['rooms'],
+    queryFn: async () => {
+      //const { data } = await axiosCommon.get(`/rooms?category=${category}`)
+      const { data } = await axiosCommon.get(`/apartments`)
+
+      return data
+    },
+  })
 
   if (loading) return <LoadingSpinner />
 
@@ -32,8 +46,8 @@ const Rooms = () => {
         <div className='flex items-center justify-center min-h-[calc(100vh-300px)]'>
           <Heading
             center={true}
-            title='No Rooms Available In This Category!'
-            subtitle='Please Select Other Categories.'
+            title='No Apartment Available'
+            //subtitle='Please Select Other Categories.'
           />
         </div>
       )}
