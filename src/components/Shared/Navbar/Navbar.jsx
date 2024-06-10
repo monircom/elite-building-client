@@ -39,7 +39,7 @@ const Navbar = () => {
                       disabled={!user}
                       className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition'
                     >
-                      Host your home
+                      Apartments
                     </button>
                   )}
                 </div>
@@ -49,7 +49,7 @@ const Navbar = () => {
                   className='p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
                 >
                   <AiOutlineMenu />
-                  <div className='hidden md:block'>
+                  <div className=''>
                     {/* Avatar */}
                     <img
                       className='rounded-full'
