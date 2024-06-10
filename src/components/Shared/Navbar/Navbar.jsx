@@ -15,15 +15,20 @@ const Navbar = () => {
         <Container>
           <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
             {/* Logo */}
+            
             <Link to='/'>
+            <div className='flex flex-row'>
               <img
                 // className='hidden md:block'
                 src='https://i.ibb.co/qkBGsdv/logo.png'
                 alt='logo'
-                width='100'
+                width='70'
                 height='100'
               />
+              <button className='text-2xl font-extrabold'> Elite Building</button>
+              </div>
             </Link>
+            
             {/* Dropdown Menu */}
             <div className='relative'>
               <div className='flex flex-row items-center gap-3'>

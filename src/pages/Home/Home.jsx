@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async'
-import Categories from '../../components/Categories/Categories'
+//import Categories from '../../components/Categories/Categories'
 import Rooms from '../../components/Home/Rooms'
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
         <title>Elite Building | Building Management System</title>
       </Helmet>
       {/* Categories section  */}
-      <Categories />
+      {/* <Categories /> */}
       {/* Rooms section */}
       <Rooms />
     </div>
