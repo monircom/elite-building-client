@@ -34,14 +34,28 @@ const Navbar = () => {
               <div className='flex flex-row items-center gap-3'>
                 {/* Become A Host btn */}
                 <div className='hidden md:block'>
-                  {!user && (
+
+                  <Link
+                      to='/'
+                      className=' px-4 py-3 hover:bg-neutral-100 transition font-semibold rounded-full'
+                    >
+                      Home
+                    </Link>
+                    <Link
+                      to='/apartments'
+                      className=' px-4 py-3 hover:bg-neutral-100 transition font-semibold rounded-full'
+                    >
+                      Apartments
+                    </Link>
+                
+                  {/* {!user && (
                     <button
                       disabled={!user}
                       className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition'
                     >
                       Apartments
                     </button>
-                  )}
+                  )} */}
                 </div>
                 {/* Dropdown btn */}
                 <div
@@ -70,6 +84,12 @@ const Navbar = () => {
                       className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
                     >
                       Home
+                    </Link>
+                    <Link
+                      to='/apartments'
+                      className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                    >
+                      Apartments
                     </Link>
 
                     {user ? (
