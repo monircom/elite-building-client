@@ -61,8 +61,13 @@ Here are ten key features of the Elite Building | Building Management System (BM
 # Assignment
 
 Assignment Category/variant: Assignment12_category_0012
+
 Admin email: admin@elite.com
+
 Admin password: Admin1
+
 Front-end Live Site Link: https://elite-building.web.app/
+
 Client Side Github Repository Link: https://github.com/programming-hero-web-course1/b9a12-client-side-monircom
+
 Server Side Github Repository Link: https://github.com/programming-hero-web-course1/b9a12-server-side-monircom
