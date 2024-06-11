@@ -7,6 +7,9 @@ import SignUp from "../pages/SignUp/SignUp";
 import RoomDetails from "../pages/RoomDetails/RoomDetails";
 import DashboardLayout from '../layouts/DashboardLayout'
 import Statistics from '../pages/Dashboard/Common/Statistics'
+import Profile from "../pages/Dashboard/Common/Profile";
+import Announcement from "../pages/Dashboard/Common/Announcement";
+import Coupon from "../pages/Dashboard/Admin/Coupon";
 
 export const router = createBrowserRouter([
   {
@@ -39,22 +42,29 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          
-            <Statistics />
-          
+        element: (          
+            <Profile />          
         ),
       },
-      // {
-      //   path: 'add-room',
-      //   element: (
-      //     <PrivateRoute>
-      //       <HostRoute>
-      //         <AddRoom />
-      //       </HostRoute>
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: 'profile',
+        element: (
+          <Profile />
+        ),
+      },
+      {
+        path: 'announcement',
+        element: (
+          <Announcement></Announcement>
+        ),
+      },
+
+      {
+        path: 'coupon',
+        element: (
+          <Coupon></Coupon>
+        ),
+      },
       // {
       //   path: 'my-listings',
       //   element: (
