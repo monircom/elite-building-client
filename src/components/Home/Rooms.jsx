@@ -9,7 +9,7 @@ import useAxiosCommon from '../../hooks/useAxiosCommon'
 const Rooms = () => {
   //const [rooms, setRooms] = useState([])
   const axiosCommon = useAxiosCommon()
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
 
   // useEffect(() => {
   //   setLoading(true)
@@ -23,7 +23,7 @@ const Rooms = () => {
 
 
   const { data: rooms = [], isLoading } = useQuery({
-    queryKey: ['rooms'],
+    queryKey: ['apartments'],
     queryFn: async () => {
       //const { data } = await axiosCommon.get(`/rooms?category=${category}`)
       const { data } = await axiosCommon.get(`/apartments`)
@@ -32,7 +32,7 @@ const Rooms = () => {
     },
   })
 
-  if (loading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner />
 
   return (
     <Container>
