@@ -9,8 +9,9 @@
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { TbFidgetSpinner } from 'react-icons/tb'
 
-const AddCouponForm = ({endDate,setEndDate,handleSubmit}) => {
+const AddCouponForm = ({endDate,setEndDate,handleSubmit,loading}) => {
     //const [endDate, setEndDate] = useState(new Date())
   return (
     <div className='w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
@@ -73,10 +74,15 @@ const AddCouponForm = ({endDate,setEndDate,handleSubmit}) => {
         </div>
 
         <button
+          disabled={loading}
           type='submit'
           className='w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500'
         >
-          Save & Continue
+          {loading ? (
+            <TbFidgetSpinner className='animate-spin m-auto' />
+          ) : (
+            ' Save & Continue'
+          )}
         </button>
       </form>
     </div>
