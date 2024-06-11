@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import CouponDataRow from '../../../components/Dashboard/TableRows/CouponsDataRow';
 
 const Coupon = () => {
     const [endDate, setEndDate] = useState(new Date())
@@ -23,24 +24,11 @@ const Coupon = () => {
     onSuccess: () => {
       console.log('Data Saved Successfully')
       toast.success('Coupon Added Successfully!')
+      refetch();
       navigate('/dashboard/coupon')
       setLoading(false)
     },
   })
-
-
-  //   Fetch Coupon Data
-  const {
-    data: coupons = [],    isLoading,    refetch,  } = useQuery({
-    queryKey: ['my-coupons', user?.email],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get(`/my-coupons/${user?.email}`)      
-      return data
-    },
-  })
-
-  console.log(coupons);
-
     // Form Handler
     const handleSubmit = async e =>{
         e.preventDefault()
@@ -66,9 +54,51 @@ const Coupon = () => {
         catch(err){
             console.log(err)
             setLoading(false)
-        }
-   
+        }   
     }
+
+
+  //   Fetch Coupon Data
+  const {
+    data: coupons = [],    isLoading,    refetch,  } = useQuery({
+    queryKey: ['my-coupons', user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/my-coupons/${user?.email}`)      
+      return data
+    },
+  })
+  console.log(coupons);    
+
+       //   delete
+//    const { mutateAsync2 } = useMutation({
+//     mutationFn: async id => {
+//       const { data } = await axiosSecure.delete(`/coupon/${id}`)
+//       return data
+//     },
+//     onSuccess: data => {
+//       console.log(data)
+//       refetch()
+//       toast.success('Successfully Coupon deleted.')
+//     },
+//   })
+
+  //  Handle Delete
+  const handleDelete = async id => {
+    console.log(id)
+    try {
+        axiosSecure.delete(`/coupon/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            toast.success('Successfully Coupon deleted.')
+                        }
+                    })
+
+      //await mutateAsync2(id)
+    } catch (err) {
+      console.log(err)
+    }
+  } 
 
 
     if (isLoading) return <LoadingSpinner />
@@ -98,6 +128,12 @@ const Coupon = () => {
                     >
                       Discount
                     </th>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Description
+                    </th>
                     
                     <th
                       scope='col'
@@ -123,13 +159,13 @@ const Coupon = () => {
                   {/* Room row data */}
 
                   {coupons.map(coupon => (
-                    <p key={coupon._id}>{coupon.code}</p>
-                    // <RoomDataRow
-                    //   key={room._id}
-                    //   room={room}
-                    //   handleDelete={handleDelete}
-                    //   refetch={refetch}
-                    // />
+                    
+                    <CouponDataRow                    
+                      key={coupon._id}
+                      coupon={coupon}
+                      handleDelete={handleDelete}
+                      refetch={refetch}
+                    />
                   ))}
                 </tbody>
               </table>
