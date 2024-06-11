@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const Card = ({ room }) => {
+const Card = ({ apartment }) => {
   return (
-    <Link to={`/room/${room?._id}`} className='col-span-1 cursor-pointer group'>
+    <Link to={`/apartment/${apartment?._id}`} className='col-span-1 cursor-pointer group'>
       <div className='flex flex-col gap-2 w-full'>
         <div
           className='
@@ -22,7 +22,7 @@ const Card = ({ room }) => {
                 group-hover:scale-110 
                 transition
               '
-            src={room?.image}
+            src={apartment?.apartment_image}
             alt='Room'
           />
           <div
@@ -33,11 +33,11 @@ const Card = ({ room }) => {
             '
           ></div>
         </div>
-        <div className='font-semibold text-lg'>{room?.location}</div>
-        <div className='font-light text-neutral-500'>5 nights .</div>
+        <div className='font-semibold text-lg'>Apartment No : {apartment?.apartment_no}</div>
+        {/* <div className='font-light text-neutral-500'>{apartment?.apartment_no}</div> */}
         <div className='flex flex-row items-center gap-1'>
-          <div className='font-semibold'>$ {room?.price}</div>
-          <div className='font-light'>night</div>
+          <div className='font-semibold'>Rent : $ {apartment?.rent}</div>
+          <div className='font-light'>Month</div>
         </div>
       </div>
     </Link>
@@ -45,7 +45,13 @@ const Card = ({ room }) => {
 }
 
 Card.propTypes = {
-  room: PropTypes.object,
+  apartment: PropTypes.object,
 }
 
 export default Card
+
+  // "apartment_image": "https://i.ibb.co/fSMfT2P/5.jpg",
+  //       "floor_no": 1,
+  //       "block_name": "A",
+  //       "apartment_no": "101",
+  //       "rent": 1000
