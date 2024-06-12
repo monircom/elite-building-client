@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async'
 import Rooms from '../../components/Home/Rooms'
 import Carousel from '../../components/Carousel'
 import About from '../About'
+import CouponsHome from '../CouponsHome'
+import AboutBuilding from '../AboutBuilding'
 
 const Home = () => {
   return (
@@ -14,6 +16,13 @@ const Home = () => {
       {/* <Categories /> */}
       {/* Rooms section */}
       <Carousel></Carousel>
+      <AboutBuilding></AboutBuilding>
+      <CouponsHome></CouponsHome>
+      
+      <Rooms></Rooms>
+
+      
+
       <About></About>
     </div>
   )

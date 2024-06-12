@@ -50,8 +50,4 @@ Card.propTypes = {
 
 export default Card
 
-  // "apartment_image": "https://i.ibb.co/fSMfT2P/5.jpg",
-  //       "floor_no": 1,
-  //       "block_name": "A",
-  //       "apartment_no": "101",
-  //       "rent": 1000
+

@@ -23,6 +23,7 @@ const AllApartments = () => {
     }
     getData()
   }, [currentPage, filter, itemsPerPage, search, sort])
+  
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axios(
