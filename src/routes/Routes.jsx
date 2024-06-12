@@ -15,6 +15,7 @@ import AllApartments from "../pages/AllApartments";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import PrivateRoute from './PrivateRoute';
 import ApartmentDetails from "../pages/RoomDetails/ApartmentDetails";
+import Agreements from "../pages/Dashboard/Admin/Agreements";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,15 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: 'agreements',
+        element: (
+          <PrivateRoute>
+          <Agreements></Agreements>
+          </PrivateRoute>
+        ),
+      },
+
 
       {
         path: 'coupon',
