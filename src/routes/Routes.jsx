@@ -12,6 +12,7 @@ import Announcement from "../pages/Dashboard/Common/Announcement";
 import Coupon from "../pages/Dashboard/Admin/Coupon";
 import AllApartments from "../pages/AllApartments";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -28,46 +29,63 @@ export const router = createBrowserRouter([
 
       { path: "/signup",
        element: <SignUp /> },
+
        { path: "/apartments",
        element: <AllApartments></AllApartments> },
       
       {
-        path: "/room/:id",
-        element: <RoomDetails />,
+        path: "/apartment/:id",
+        
+        element:
+        (
+          <PrivateRoute>
+            <RoomDetails />
+          </PrivateRoute>
+        ),
+
       },
     ],
   },
   {
     path: '/dashboard',
     element: (
-     
-        <DashboardLayout />
+        <PrivateRoute>
+          <DashboardLayout />
+        </PrivateRoute>
       
     ),
     children: [
       {
         index: true,
-        element: (          
-            <Profile />          
+        element: (   
+          <PrivateRoute>
+            <Profile />    
+          </PrivateRoute>      
         ),
       },
       {
         path: 'profile',
         element: (
+          <PrivateRoute>
           <Profile />
+          </PrivateRoute>
         ),
       },
       {
         path: 'announcement',
         element: (
+          <PrivateRoute>
           <Announcement></Announcement>
+          </PrivateRoute>
         ),
       },
 
       {
         path: 'coupon',
         element: (
+          <PrivateRoute>
           <Coupon></Coupon>
+          </PrivateRoute>
         ),
       },
       // {
@@ -83,9 +101,9 @@ export const router = createBrowserRouter([
       {
         path: 'member',
         element: (
-          
+          <PrivateRoute>
               <ManageUsers />
-           
+              </PrivateRoute>
         ),
       },
       // {

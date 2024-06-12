@@ -1,13 +1,31 @@
 import Container from '../Container'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/images/placeholder.jpg'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { user, logOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
+
+  function handleLogOut() {
+    logOut()
+      .then(() => {
+        toast.error("User Logged out", {
+          duration: 2000,
+          position: "top-center",
+        });
+        setTimeout(function () {
+          navigate("/");
+        }, 2500);
+        console.log("user Logged out successfully");
+      })
+      .catch((error) => console.error(error));
+  }
+
 
   return (
     <div className='fixed w-full bg-white z-10 shadow-sm mb-5'>
@@ -101,7 +119,7 @@ const Navbar = () => {
                           Dashboard
                         </Link>
                         <div
-                          onClick={logOut}
+                          onClick={handleLogOut}
                           className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
                         >
                           Logout

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 //import JobCard from '../components/JobCard'
 import axios from 'axios'
+import Card from '../components/Home/Card'
 
 const AllApartments = () => {
   const [itemsPerPage, setItemsPerPage] = useState(6)
@@ -61,7 +62,10 @@ const AllApartments = () => {
   return (
     <div className='container px-6 py-10 mx-auto min-h-[calc(100vh-306px)] flex flex-col justify-between'>
       <div>
-        <div className='flex flex-col md:flex-row justify-center items-center gap-5 '>
+      <div className="w-full h-[100px] bg-[rgba(19,19,19,0.05)] rounded-xl flex justify-center items-center">
+        <h1 className="text-3xl font-bold">Apartments</h1>
+      </div>
+        <div className='hidden flex flex-col md:flex-row justify-center items-center gap-5 '>
           <div>
             <select
               onChange={e => {
@@ -117,10 +121,10 @@ const AllApartments = () => {
             Reset
           </button>
         </div>
-        <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6'>
           {apartments.map(apartment => (
-            <p key={apartment._id}>{apartment?.apartment_no}</p>
-           // <JobCard key={job._id} job={job} />
+            // <p key={apartment._id}>{apartment?.apartment_no}</p>
+            <Card key={apartment._id} apartment={apartment} />
           ))}
         </div>
       </div>

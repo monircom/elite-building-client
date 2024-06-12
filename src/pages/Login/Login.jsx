@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location?.state || '/'
-  const { signInWithGoogle, signIn, loading, setLoading, resetPassword } =
+  const { signInWithGoogle, signIn, loading, setLoading } =
     useAuth()
   const [email, setEmail] = useState('')
 
@@ -24,7 +24,7 @@ const Login = () => {
       // 1. sign in user
       await signIn(email, password)
       navigate(from)
-      toast.success('Signup Successful')
+      toast.success('Sign in Successful')
     } catch (err) {
       console.log(err)
       toast.error(err.message)
