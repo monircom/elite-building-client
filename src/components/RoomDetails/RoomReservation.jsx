@@ -12,7 +12,7 @@ const RoomReservation = ({ room }) => {
       <div className='flex justify-center'>{/* Calender */}</div>
       <hr />
       <div className='p-4'>
-        <Button label={'Reserve'} />
+        <Button label={'Agreement'} />
       </div>
       <hr />
       <div className='p-4 flex items-center justify-between font-semibold text-lg'>
