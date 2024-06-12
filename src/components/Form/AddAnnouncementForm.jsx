@@ -7,58 +7,29 @@
 //     "validUntil": ISODate("2024-06-30T00:00:00Z")
 //   }
 import { useState } from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import { TbFidgetSpinner } from 'react-icons/tb'
 
-const AddCouponForm = ({endDate,setEndDate,handleSubmit,loading}) => {
+const AddCouponForm = ({handleSubmit,loading}) => {
     //const [endDate, setEndDate] = useState(new Date())
   return (
     <div className='w-full  flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
       <form onSubmit={handleSubmit}>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
+        <div className='grid grid-cols-1'>
           <div className='space-y-6'>
             <div className='space-y-1 text-sm'>
-              <label htmlFor='code' className='block text-gray-600'>
-                Code
+              <label htmlFor='title' className='block text-gray-600'>
+                Title
               </label>
               <input
                 className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
-                name='code'
-                id='code'
+                name='title'
+                id='title'
                 type='text'
-                placeholder='Code'
+                placeholder='Title'
                 required
               />
             </div>
-            <div className='space-y-1'>
-            <label htmlFor='code' className='block text-gray-600'>
-                End Date
-              </label>
-              <label className="input-group">
-               {/* Date Picker Input Field */}
-              <DatePicker
-                className='border p-2 rounded-md bg-white'
-                selected={endDate}                
-                onChange={date => setEndDate(date)}
-              />
-              </label>
-            </div>
-          </div>
-          <div className='space-y-6'>
-            <div className='space-y-1 text-sm'>
-              <label htmlFor='discount' className='block text-gray-600'>
-              Discount
-              </label>
-              <input
-                className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
-                name='discount'
-                id='discount'
-                type='number'
-                placeholder='Discount'
-                required
-              />
-            </div>
+
             <div className='space-y-1 text-sm'>
               <label htmlFor='description' className='block text-gray-600'>
                 Description
@@ -70,7 +41,9 @@ const AddCouponForm = ({endDate,setEndDate,handleSubmit,loading}) => {
                 name='description'
               ></textarea>
             </div>
+            
           </div>
+
         </div>
 
         <button
@@ -81,7 +54,7 @@ const AddCouponForm = ({endDate,setEndDate,handleSubmit,loading}) => {
           {loading ? (
             <TbFidgetSpinner className='animate-spin m-auto' />
           ) : (
-            'Add Coupon'
+            'Add Announcement'
           )}
         </button>
       </form>

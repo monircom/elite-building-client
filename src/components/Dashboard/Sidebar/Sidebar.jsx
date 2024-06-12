@@ -8,6 +8,8 @@ import { TfiAnnouncement } from "react-icons/tfi";
 import { MdHomeWork } from 'react-icons/md'
 import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
+import { FaUsersGear } from "react-icons/fa6";
+import { FaHandshake } from "react-icons/fa";
 import { NavLink, useNavigate } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import { Link } from 'react-router-dom'
@@ -81,7 +83,7 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto'>
+            <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center  mx-auto'>
             <Link to='/'>
             <div className='flex flex-row'>
               <img
@@ -205,7 +207,7 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <RiCoupon2Line className='w-5 h-5' />
+                <FaUsersGear className='w-5 h-5' />
                 <span className='mx-4 font-medium'>Manage Member</span>
               </NavLink>
               }              
@@ -220,7 +222,7 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <RiCoupon2Line className='w-5 h-5' />
+                <TfiAnnouncement className='w-5 h-5' />
                 <span className='mx-4 font-medium'>Announcement</span>
               </NavLink>
               }     
@@ -234,7 +236,7 @@ const Sidebar = () => {
                   }`
                 }
               >
-                <RiCoupon2Line className='w-5 h-5' />
+                <FaHandshake  className='w-5 h-5' />
                 <span className='mx-4 font-medium'>Agreement</span>
               </NavLink>
               }

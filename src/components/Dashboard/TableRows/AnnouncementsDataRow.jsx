@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import DeleteModal from '../../Modal/DeleteModal'
 import { useState } from 'react'
 
-const CouponDataRow = ({ coupon, handleDelete }) => {
+const AnnouncementsDataRow = ({ announcement, handleDelete }) => {
     // for delete modal
   const [isOpen, setIsOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -13,21 +13,12 @@ const CouponDataRow = ({ coupon, handleDelete }) => {
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-      <p className='text-gray-900 whitespace-no-wrap'>{coupon?.code}</p>      
+      <p className='text-gray-900 whitespace-no-wrap'>{announcement?.title}</p>      
       </td>
+      
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-      <p className='text-gray-900 whitespace-no-wrap'>{coupon?.discount}%</p>      
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{coupon?.description}</p>
-      </td>
-     
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>
-            
-          {format(new Date(coupon?.validUntil), 'P')}
-        </p>
-      </td>
+        <p className='text-gray-900 whitespace-no-wrap'>{announcement?.description}</p>
+      </td>    
       
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
       <button
@@ -45,7 +36,7 @@ const CouponDataRow = ({ coupon, handleDelete }) => {
           isOpen={isOpen}
           closeModal={closeModal}
           handleDelete={handleDelete}
-          id={coupon?._id}
+          id={announcement?._id}
         />
       </td>
       {/* <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -61,10 +52,10 @@ const CouponDataRow = ({ coupon, handleDelete }) => {
   )
 }
 
-CouponDataRow.propTypes = {
-  coupon: PropTypes.object,
+AnnouncementsDataRow.propTypes = {
+  announcement: PropTypes.object,
   refetch: PropTypes.func,
   handleDelete: PropTypes.func,
 }
 
-export default CouponDataRow
+export default AnnouncementsDataRow

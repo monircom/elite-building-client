@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddCouponForm from '../../../components/Form/AddCouponForm';
+import AddAnnouncementForm from '../../../components/Form/AddAnnouncementForm';
 import { Helmet } from 'react-helmet-async';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -7,25 +7,25 @@ import toast from 'react-hot-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
-import CouponDataRow from '../../../components/Dashboard/TableRows/CouponsDataRow';
+import AnnouncementsDataRow from '../../../components/Dashboard/TableRows/AnnouncementsDataRow';
 
-const Coupon = () => {
-    const [endDate, setEndDate] = useState(new Date())
+const Announcements = () => {
+    //const [endDate, setEndDate] = useState(new Date())
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const [loading, setLoading] = useState(false)
     const { user } = useAuth()
     
   const { mutateAsync } = useMutation({
-    mutationFn: async couponData => {
-      const { data } = await axiosSecure.post(`/coupon`, couponData)
+    mutationFn: async announcementData => {
+      const { data } = await axiosSecure.post(`/announcement`, announcementData)
       return data
     },
     onSuccess: () => {
       console.log('Data Saved Successfully')
-      toast.success('Coupon Added Successfully!')
+      toast.success('Announcement Added Successfully!')
       refetch();
-      navigate('/dashboard/coupon')
+      navigate('/dashboard/admin-announcement')
       setLoading(false)
     },
   })
@@ -35,20 +35,18 @@ const Coupon = () => {
         setLoading(true)
         const form = e.target
         console.log(form);
-        const code = form.code.value
-        const discount = form.discount.value
-        const description = form.description.value
-        const validUntil = endDate;
+        const title = form.title.value        
+        const description = form.description.value        
         const email = user?.email;
 
         try{
-            const couponData ={
-                code,discount,description,validUntil,email
+            const announcementData ={
+              title,description,email
             }
 
-            console.table(couponData);
+            console.table(announcementData);
             //   Post request to server
-            await mutateAsync(couponData)
+            await mutateAsync(announcementData)
 
         }
         catch(err){
@@ -58,27 +56,27 @@ const Coupon = () => {
     }
 
 
-  //   Fetch Coupon Data
+  //   Fetch announcement Data
   const {
-    data: coupons = [],    isLoading,    refetch,  } = useQuery({
-    queryKey: ['my-coupons', user?.email],
+    data: announcements = [],    isLoading,    refetch,  } = useQuery({
+    queryKey: ['my-announcements', user?.email],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/my-coupons/${user?.email}`)      
+      const { data } = await axiosSecure.get(`/my-announcements/${user?.email}`)      
       return data
     },
   })
-  console.log(coupons);    
+  console.log(announcements);    
 
 
   //  Handle Delete
   const handleDelete = async id => {
     console.log(id)
     try {
-        axiosSecure.delete(`/coupon/${id}`)
+        axiosSecure.delete(`/announcement/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch();
-                            toast.success('Successfully Coupon deleted.')
+                            toast.success('Successfully Announcement deleted.')
                         }
                     })
       
@@ -93,12 +91,12 @@ const Coupon = () => {
     return (
         <div>
             <Helmet>
-                Coupons | Dashboard
+            Announcements | Dashboard
             </Helmet>
             
             <div className='container mx-auto px-4 sm:px-8'>
             <div className="w-full h-[100px] bg-[rgba(19,19,19,0.05)] rounded-xl flex flex-col justify-center items-center mt-5">
-        <h1 className="text-3xl font-bold">Coupons </h1>        
+        <h1 className="text-3xl font-bold">Announcements </h1>        
       </div>
         <div className='py-8'>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
@@ -110,27 +108,16 @@ const Coupon = () => {
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Code
+                      Title
                     </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Discount
-                    </th>
+                   
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
                       Description
-                    </th>
-                    
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                    End Date
                     </th>                    
+                                     
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
@@ -148,11 +135,11 @@ const Coupon = () => {
                 <tbody>
                   {/* Room row data */}
 
-                  {coupons.map(coupon => (
+                  {announcements.map(announcement => (
                     
-                    <CouponDataRow                    
-                      key={coupon._id}
-                      coupon={coupon}
+                    <AnnouncementsDataRow                   
+                      key={announcement._id}
+                      announcement={announcement}
                       handleDelete={handleDelete}                      
                     />
                   ))}
@@ -161,11 +148,11 @@ const Coupon = () => {
             </div>
           </div>
         </div>
-        <AddCouponForm endDate={endDate} setEndDate={setEndDate}   handleSubmit={handleSubmit} loading={loading}></AddCouponForm>
+        <AddAnnouncementForm handleSubmit={handleSubmit} loading={loading}></AddAnnouncementForm>
       </div>
             
         </div>
     );
 };
 
-export default Coupon;
+export default Announcements;

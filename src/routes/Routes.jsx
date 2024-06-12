@@ -10,9 +10,11 @@ import Statistics from '../pages/Dashboard/Common/Statistics'
 import Profile from "../pages/Dashboard/Common/Profile";
 import Announcement from "../pages/Dashboard/Common/Announcement";
 import Coupon from "../pages/Dashboard/Admin/Coupon";
+import Announcements from "../pages/Dashboard/Admin/Announcements";
 import AllApartments from "../pages/AllApartments";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import PrivateRoute from './PrivateRoute';
+import ApartmentDetails from "../pages/RoomDetails/ApartmentDetails";
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +41,7 @@ export const router = createBrowserRouter([
         element:
         (
           <PrivateRoute>
-            <RoomDetails />
+            <ApartmentDetails />
           </PrivateRoute>
         ),
 
@@ -103,6 +105,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
               <ManageUsers />
+              </PrivateRoute>
+        ),
+      },
+      {
+        path: 'admin-announcement',
+        element: (
+          <PrivateRoute>
+              <Announcements></Announcements>
               </PrivateRoute>
         ),
       },
