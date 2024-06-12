@@ -9,7 +9,7 @@
 import { useState } from 'react'
 import { TbFidgetSpinner } from 'react-icons/tb'
 
-const AddCouponForm = ({handleSubmit,loading}) => {
+const AddAnnouncementForm = ({handleSubmit,loading}) => {
     //const [endDate, setEndDate] = useState(new Date())
   return (
     <div className='w-full  flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
@@ -62,4 +62,4 @@ const AddCouponForm = ({handleSubmit,loading}) => {
   )
 }
 
-export default AddCouponForm
+export default AddAnnouncementForm
