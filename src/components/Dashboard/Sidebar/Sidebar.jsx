@@ -8,18 +8,42 @@ import { TfiAnnouncement } from "react-icons/tfi";
 import { MdHomeWork } from 'react-icons/md'
 import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import { Link } from 'react-router-dom'
+import useRole from '../../../hooks/useRole'
+import toast from 'react-hot-toast'
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
+  const [role, isLoading] = useRole()
+  console.log(role, isLoading)
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive)
   }
+
+  function handleLogOut() {
+    logOut()
+      .then(() => {
+        toast.error("User Logged out", {
+          duration: 2000,
+          position: "top-center",
+        });
+        setTimeout(function () {
+          navigate("/");
+        }, 2500);
+        console.log("user Logged out successfully");
+      })
+      .catch((error) => console.error(error));
+  }
+
+
+
+
   return (
     <>
       {/* Small Screen Navbar */}
@@ -93,8 +117,9 @@ const Sidebar = () => {
 
             <span className='mx-4 font-medium'>Profile</span>
           </NavLink>
+          
               {/* Statistics */}
-              <NavLink
+              {/* <NavLink
                 to='statistics'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
@@ -103,11 +128,11 @@ const Sidebar = () => {
                 }
               >
                 <BsGraphUp className='w-5 h-5' />
-
                 <span className='mx-4 font-medium'>Statistics</span>
-              </NavLink>
+              </NavLink> */}
 
               {/* Announcement */}
+              {role === 'User' && 
               <NavLink
                 to='announcement'
                 className={({ isActive }) =>
@@ -120,8 +145,102 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Announcement</span>
               </NavLink>
+              }
+            
+              {/* Announcement */}
+              {role === 'Member' && 
+              <NavLink
+                to='announcement'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <TfiAnnouncement className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Announcement</span>
+              </NavLink>
+              }
+
+              {/* Make payment */}
+              {role === 'Member' && 
+              <NavLink
+                to='make-payment'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <TfiAnnouncement className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Make payment</span>
+              </NavLink>
+              }
+  
+              {/* Payment History */}
+              {role === 'Member' && 
+              <NavLink
+                to='payment-history'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <TfiAnnouncement className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Payment History</span>
+              </NavLink>
+              }            
+
+              {/* Manage Member */}
+              {role === 'Admin' && 
+              <NavLink
+                to='member'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <RiCoupon2Line className='w-5 h-5' />
+                <span className='mx-4 font-medium'>Manage Member</span>
+              </NavLink>
+              }              
+             
+              {/* Admin-announcement */}
+              {role === 'Admin' && 
+              <NavLink
+                to='admin-announcement'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <RiCoupon2Line className='w-5 h-5' />
+                <span className='mx-4 font-medium'>Announcement</span>
+              </NavLink>
+              }     
+               {/* Agreement */}
+               {role === 'Admin' && 
+              <NavLink
+                to='agreement'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+                  }`
+                }
+              >
+                <RiCoupon2Line className='w-5 h-5' />
+                <span className='mx-4 font-medium'>Agreement</span>
+              </NavLink>
+              }
 
               {/* Coupon */}
+              {role === 'Admin' && 
               <NavLink
                 to='coupon'
                 className={({ isActive }) =>
@@ -131,36 +250,10 @@ const Sidebar = () => {
                 }
               >
                 <RiCoupon2Line className='w-5 h-5' />
-
                 <span className='mx-4 font-medium'>Coupon</span>
               </NavLink>
+              }        
 
-              {/* Add Room */}
-              <NavLink
-                to='add-room'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-                  }`
-                }
-              >
-                <BsFillHouseAddFill className='w-5 h-5' />
-
-                <span className='mx-4 font-medium'>Add Room</span>
-              </NavLink>
-              {/* My Listing */}
-              <NavLink
-                to='my-listings'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-                  }`
-                }
-              >
-                <MdHomeWork className='w-5 h-5' />
-
-                <span className='mx-4 font-medium'>My Listings</span>
-              </NavLink>
             </nav>
           </div>
         </div>
@@ -170,7 +263,7 @@ const Sidebar = () => {
 
           
           <button
-            onClick={logOut}
+            onClick={handleLogOut}
             className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
           >
             <GrLogout className='w-5 h-5' />

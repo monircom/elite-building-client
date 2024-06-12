@@ -10,6 +10,8 @@ import Statistics from '../pages/Dashboard/Common/Statistics'
 import Profile from "../pages/Dashboard/Common/Profile";
 import Announcement from "../pages/Dashboard/Common/Announcement";
 import Coupon from "../pages/Dashboard/Admin/Coupon";
+import AllApartments from "../pages/AllApartments";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +28,9 @@ export const router = createBrowserRouter([
 
       { path: "/signup",
        element: <SignUp /> },
+       { path: "/apartments",
+       element: <AllApartments></AllApartments> },
+      
       {
         path: "/room/:id",
         element: <RoomDetails />,
@@ -75,16 +80,14 @@ export const router = createBrowserRouter([
       //     </PrivateRoute>
       //   ),
       // },
-      // {
-      //   path: 'manage-users',
-      //   element: (
-      //     <PrivateRoute>
-      //       <AdminRoute>
-      //         <ManageUsers />
-      //       </AdminRoute>
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: 'member',
+        element: (
+          
+              <ManageUsers />
+           
+        ),
+      },
       // {
       //   path: 'my-bookings',
       //   element: (

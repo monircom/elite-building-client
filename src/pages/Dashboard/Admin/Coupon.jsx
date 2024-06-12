@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AddCouponForm from '../../../components/Form/AddCouponForm';
 import { Helmet } from 'react-helmet-async';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import useAxiosSecure, { axiosSecure } from '../../../hooks/useAxiosSecure';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
@@ -69,18 +69,6 @@ const Coupon = () => {
   })
   console.log(coupons);    
 
-       //   delete
-//    const { mutateAsync2 } = useMutation({
-//     mutationFn: async id => {
-//       const { data } = await axiosSecure.delete(`/coupon/${id}`)
-//       return data
-//     },
-//     onSuccess: data => {
-//       console.log(data)
-//       refetch()
-//       toast.success('Successfully Coupon deleted.')
-//     },
-//   })
 
   //  Handle Delete
   const handleDelete = async id => {
@@ -93,8 +81,7 @@ const Coupon = () => {
                             toast.success('Successfully Coupon deleted.')
                         }
                     })
-
-      //await mutateAsync2(id)
+      
     } catch (err) {
       console.log(err)
     }
@@ -163,8 +150,7 @@ const Coupon = () => {
                     <CouponDataRow                    
                       key={coupon._id}
                       coupon={coupon}
-                      handleDelete={handleDelete}
-                      refetch={refetch}
+                      handleDelete={handleDelete}                      
                     />
                   ))}
                 </tbody>

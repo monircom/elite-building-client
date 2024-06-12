@@ -13,13 +13,17 @@ import {
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
 import axios from 'axios'
+import useAxiosCommon from '../hooks/useAxiosCommon'
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
 
+
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const axiosPublic = useAxiosCommon();
 
   const createUser = (email, password) => {
     setLoading(true)
@@ -41,13 +45,18 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email)
   }
 
-  const logOut = async () => {
-    setLoading(true)
-    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    })
-    return signOut(auth)
-  }
+  // const logOut = async () => {
+  //   setLoading(true)
+  //   await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+  //     withCredentials: true,
+  //   })
+  //   return signOut(auth)
+  // }
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+}
 
   const updateUserProfile = (name, photo) => {
     return updateProfile(auth.currentUser, {
@@ -55,24 +64,51 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     })
   }
-  // Get token from server
-  const getToken = async email => {
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_API_URL}/jwt`,
-      { email },
-      { withCredentials: true }
-    )
-    return data
-  }
+
+  //Get token from server
+  // const getToken = async email => {
+  //   const { data } = await axios.post(
+  //     `${import.meta.env.VITE_API_URL}/jwt`,
+  //     { email }      
+  //   )
+  //   return data
+  // }
+
+    // save user
+    const saveUser = async user => {
+      const currentUser = {
+        email: user?.email,
+        role: 'User',
+        status: 'Verified',
+      }
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/user`,
+        currentUser
+      )
+      return data
+    }
 
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
       if (currentUser) {
-        getToken(currentUser.email)
+       // get token and store client
+       const userInfo = { email: currentUser.email };
+       axiosPublic.post('/jwt', userInfo)
+           .then(res => {
+               if (res.data.token) {
+                   localStorage.setItem('access-token', res.data.token);
+                   setLoading(false);
+               }
+           })
+        saveUser(currentUser)
       }
-      setLoading(false)
+      else {
+        // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
+        localStorage.removeItem('access-token');
+        setLoading(false);
+    }
     })
     return () => {
       return unsubscribe()

@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import DeleteModal from '../../Modal/DeleteModal'
 import { useState } from 'react'
 
-const CouponDataRow = ({ coupon, handleDelete, refetch }) => {
+const CouponDataRow = ({ coupon, handleDelete }) => {
     // for delete modal
   const [isOpen, setIsOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
