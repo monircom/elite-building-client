@@ -8,7 +8,18 @@ First, clone to loacal drive:
   
 Open http://localhost:3000 with your browser to see the result.  
 
-Here are ten key features of the Elite Building | Building Management System (BMS):
+# Live Link
+
+Live Site Link: https://elite-building.web.app/
+
+**Admin username:** <pre>`admin@elite.com`</pre>
+
+**Admin password:** <pre>`Admin1`</pre>
+
+
+
+
+Here some key features of the Elite Building | Building Management System (BMS):
 
 1. **User Authentication and Profile Management:**
    - Users can log in and have their profile picture displayed in the navbar.
@@ -65,17 +76,3 @@ Here are ten key features of the Elite Building | Building Management System (BM
    - Owners can make announcements via the admin dashboard.
    - Display of all announcements to users and members in their respective dashboards.
 
-
-# Assignment
-
-Assignment Category/variant: Assignment12_category_0012
-
-Admin email: admin@elite.com
-
-Admin password: Admin1
-
-Front-end Live Site Link: https://elite-building.web.app/
-
-Client Side Github Repository Link: https://github.com/programming-hero-web-course1/b9a12-client-side-monircom
-
-Server Side Github Repository Link: https://github.com/programming-hero-web-course1/b9a12-server-side-monircom
