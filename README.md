@@ -1,6 +1,6 @@
 # Elite Building
 
-#Getting Started
+# Getting Started
 
 First, clone to loacal drive:
 - npm init
