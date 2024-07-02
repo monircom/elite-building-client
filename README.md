@@ -89,5 +89,5 @@ The project utilizes the following NPM packages:
 -  Swiper Slider: Utilizes the Swiper slider library for creating responsive and touch-enabled sliders in the application.
 -  React Awesome Reveal: Utilizes React Awesome Reveal to easily create stunning and customizable reveal animations for elements as they enter the viewport.
 -  React Helmet: Incorporates the React Helmet library for managing the document head of the application.
--  Recharts: Implements the Recharts library for creating interactive and visually appealing charts within the application.
+-  React Leaflet
 
