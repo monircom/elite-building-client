@@ -1,5 +1,12 @@
 # Elite Building
 
+#Getting Started
+
+First, clone to loacal drive:
+- npm init
+- npm run dev
+Open http://localhost:3000 with your browser to see the result.  
+
 Here are ten key features of the Elite Building | Building Management System (BMS):
 
 1. **User Authentication and Profile Management:**
