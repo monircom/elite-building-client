@@ -3,7 +3,7 @@
 # Getting Started
 
 First, clone to loacal drive:
-- <pre>npm init</pre> 
+- <pre>npm install</pre> 
 - <pre>npm run dev</pre>
   
 Open http://localhost:3000 with your browser to see the result.  
